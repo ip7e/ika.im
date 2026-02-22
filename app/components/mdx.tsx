@@ -44,15 +44,15 @@ function CustomLink(props) {
   return <a target="_blank" rel="noopener noreferrer" {...props} />
 }
 
-function RoundedImage(props) {
-  // Determine if the image should be shown at a larger width
-  // If width prop is larger than a threshold or if isWide prop is explicitly set
-  const isWide = props.width > 800 || props.isWide;
-  
-  // Apply appropriate className based on image size
+function RoundedImage(props: any) {
+  const { isWide: isWideProp, ...rest } = props;
+  const isWide = rest.width > 800 || isWideProp;
   const className = `rounded-lg ${isWide ? 'wide-image' : ''}`;
-  
-  return <Image alt={props.alt} className={className} {...props} />
+  if (!rest.width || !rest.height) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img alt={rest.alt} className={className} {...rest} />
+  }
+  return <Image alt={rest.alt} className={className} {...rest} />
 }
 
 function Code({ children, ...props }) {
@@ -120,6 +120,7 @@ export function CustomMDX(props) {
     <MDXRemote
       {...props}
       components={{ ...components, ...(props.components || {}) }}
+      options={{ blockJS: false }}
     />
   )
 }

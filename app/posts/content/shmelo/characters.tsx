@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "motion/react";
+import { motion, Transition, useInView } from "motion/react";
 import { useRef } from "react";
 import King from "./_assets/king";
 import Queen from "./_assets/queen";
@@ -14,7 +14,7 @@ const fadeInUpAnimation = {
   animate: { opacity: 1, y: 0 },
 };
 
-const iconTransition = {
+const iconTransition: Transition = {
   mass: 1,
   type: "spring",
 };
