@@ -53,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <PlausibleProvider domain="ika.im">
+    <PlausibleProvider>
       <html
         lang="en"
         className={cx(
